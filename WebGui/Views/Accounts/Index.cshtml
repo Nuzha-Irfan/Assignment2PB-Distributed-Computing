@@ -1,0 +1,188 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div id="studentForm">
+    <form>
+
+
+        
+        <input type="number" id="searchid" name="searchid" placeholder="search By ID" />
+        <input type="number" id="aid" name="aid" placeholder="Account Id" />
+        <input type="text" id="fname" name="fname" placeholder="First Name" />
+        <input type="text" id="lname" name="lname" placeholder="Last Name" />
+        <input type="number" id="accNo" name="accNo" placeholder="Account Number" />
+        <input type="number" id="balance" name="balance" placeholder="Balance" />
+        <input type="number" id="pin" name="pin" placeholder="Pin Number" />
+        <input type="file" name="image" id="image" />
+        <img src="" id="image" />
+       
+
+    </form>
+ 
+    <form>
+        <input type="text" id="search" name="search" placeholder="Enter Last Name to search" />
+    </form>
+</div>
+    <button id="search" onclick="search()">Search</button>
+ 
+    <button id="insert" onclick="insert()">Insert</button>
+
+    <button id="update" onclick="update()">Update</button>
+
+    <button id="delete" onclick="deleteid()">delete</button>
+
+    <button id="searchid" onclick="searchid()">Search ID</button>
+
+    <button id="generate" onclick="generate()">Generate 100 Records</button>
+    
+<script>
+    function search() 
+    {
+            var search = $('#search').val() ;
+           
+            $.ajax({
+                url: '/Accounts/Search/' ,
+                type: 'GET',
+                dataType: 'JSON',
+                data: { searchtext: search },
+                success: function (data, textStatus, xhr) 
+                {
+                    
+              
+                     $("#fname").val(data.FirstName);
+                     $("#lname").val(data.LastName);
+                     $("#accNo").val(data.AccountNo);
+                     $("#balance").val(data.balance);
+                     $("#pin").val(data.pin);
+                     $("#aid").val(data.Id);
+                     
+                    $("#image").attr('src', 'https://picsum.photos/200/300');
+               
+                },
+                 error: function (xhr, textStatus, errorThrown) 
+                {
+                     console.log(errorThrown);
+                }
+        });
+    }
+
+    function insert() 
+    {    var account = new Object ();
+            account.FirstName= $('#fname').val();
+            account.LastName= $("#lname").val();
+            account.AccountNo= $("#accNo").val();
+             account.balance= $("#balance").val();
+              account.pin= $("#pin").val();
+            account.ImageSource=$("#image").val();
+        $.ajax({
+            type: 'POST',
+            url: '/Accounts/Insert/',
+            dataType: 'json',
+            data:account,
+            success: function (data, textStatus, xhr) 
+            {
+                alert("Data Inserted");
+            },
+            error: function (xhr, textStatus, error) 
+            {
+                alert("Error");
+                console.log(xhr.statusText);
+                console.log(textStatus);
+                console.log(error);
+            }
+        });
+    }
+
+    function deleteid()
+    {
+        $.ajax({
+            url: "/Accounts/Delete/" + $('#aid').val(),
+            type: "DELETE", // <- Change here
+            contentType: "application/json",
+            success: function () 
+            {
+                alert("Deleted successfully.");
+                ReloadGrid();
+            },
+            error: function () {
+                alert("Could Not Be Deleted");
+            }
+        });
+    }
+
+
+    function generate (){
+
+        $.ajax({
+            url: "/Accounts/Generate/" ,
+            type: "POST", // <- Change here
+            contentType: "application/json",
+            success: function () {
+                alert("Data Generated Succesfully");
+                ReloadGrid();
+            },
+            error: function () {
+            }
+        });
+
+
+
+
+    }
+
+    function update() 
+    {
+            var account = new Object();
+            account.FirstName = $('#fname').val();
+            account.LastName = $("#lname").val();
+            account.AccountNo = $("#accNo").val();
+            account.balance = $("#balance").val()
+            account.pin = $("#pin").val();
+        $.ajax({
+            type: 'PUT',
+            url: '/Accounts/Update/' + $('#aid').val(),
+            dataType:'json',
+            data:account,
+            success: function ()
+            {
+                alert("Data updated");
+            },
+            error: function (xhr, textStatus, error) 
+            {
+                alert("Error");
+                console.log(xhr.statusText);
+                console.log(textStatus);
+                console.log(error);
+            }
+        });
+    }
+
+
+
+        function searchid() {
+            $.ajax({
+                url: '/Accounts/SearchbyID/' + $('#searchid').val(),
+                type: 'get',
+                contentType: 'application/json',
+                processData: false,
+                success: function (data, textStatus, jQxhr) {
+                    var obj = JSON.parse(data);
+                    $("#fname").val(obj.FirstName);
+                    $("#lname").val(obj.LastName);
+                    $("#accNo").val(obj.AccountNo);
+                    $("#balance").val(obj.balance);
+                    $("#pin").val(obj.pin);
+                    $("#aid").val(obj.Id);
+                    
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        }
+
+   
+
+</script>

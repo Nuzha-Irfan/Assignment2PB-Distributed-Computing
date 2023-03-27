@@ -1,0 +1,22 @@
+﻿<Window x:Class="ClientDesktop.upload"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientDesktop"
+        mc:Ignorable="d"
+        Title="upload" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="NameText"  Content="" HorizontalAlignment="Left" Margin="318,40,0,0" VerticalAlignment="Top" Width="160" FontSize="36"/>
+        <Button Content="Upload Python Script" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click" Margin="309,217,0,0"/>
+        <ProgressBar Name="progressbar1" HorizontalAlignment="Left" Height="10" Margin="619,364,0,0" VerticalAlignment="Top" Width="100"/>
+
+        <TextBox Name="desc" HorizontalAlignment="Center" Margin="0,157,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" Width="120" Height="35"/>
+        <Label Content="Job Description" HorizontalAlignment="Left" Margin="221,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.321,-0.373"/>
+        <Button Content="Connect to Clients" HorizontalAlignment="Left" Margin="318,354,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Label Content="Welcome" HorizontalAlignment="Left" Margin="156,40,0,0" VerticalAlignment="Top" FontSize="36" RenderTransformOrigin="0.445,0.467"/>
+        <Label Content="       OR" HorizontalAlignment="Left" Margin="330,274,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.321,-0.373"/>
+
+
+    </Grid>
+</Window>

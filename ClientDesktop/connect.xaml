@@ -1,0 +1,42 @@
+﻿<Window x:Class="ClientDesktop.connect"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientDesktop"
+        mc:Ignorable="d"
+        Title="connect" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="187*"/>
+            <ColumnDefinition Width="13*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnGetAll" Content="List All Clients" HorizontalAlignment="Left" Margin="567,151,0,0" VerticalAlignment="Top" Width="164" Height="23" Click="btnGetAll_Click" />
+        <Label Content="Connect to clients" HorizontalAlignment="Left" Margin="238,10,0,0" VerticalAlignment="Top" FontSize="30"/>
+
+        <DataGrid AutoGenerateColumns="False" x:Name="serviceInfo" HorizontalAlignment="Center" Height="134" Margin="0,179,0,0" VerticalAlignment="Top" Width="780"  RenderTransformOrigin="0.491,1.099" Grid.ColumnSpan="2" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" IsReadOnly="True" Binding="{Binding clientName}" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Header="IP Address" IsReadOnly="True" Binding="{Binding ipAddress}" Width="300"></DataGridTextColumn>
+                <DataGridTextColumn Header="Port Number" IsReadOnly="True" Binding="{Binding port}" Width="250"></DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnConnect" Tag="{Binding clientName}" Content="Connect" Click="btnConnect_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label x:Name="NameText" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="26,287,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="IpAddText" Content="" Visibility="Visible" HorizontalAlignment="Left" Margin="358,287,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="PortNoText" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="193,279,0,0" VerticalAlignment="Top"/>
+
+        <ProgressBar Name="progress" Visibility="Hidden" HorizontalAlignment="Left" Height="10" Margin="567,377,0,0" VerticalAlignment="Top" Width="100"/>
+        
+        <Button x:Name="btntest"  Content="Connect"  Visibility="Hidden" HorizontalAlignment="Center" Margin="0,382,0,0" VerticalAlignment="Top" Width="208" Height="33"/>
+        <Label Content="Total jobs worked on" HorizontalAlignment="Left" Margin="179,336,0,0" VerticalAlignment="Top"/>
+
+        <TextBox Name="total"  HorizontalAlignment="Left" Margin="390,336,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>

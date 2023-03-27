@@ -1,0 +1,68 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @using Website.Models;
+    @model IEnumerable<Job>;
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+</script>
+<div id="tableview">
+    <h1>Connected Client Highlighted</h1>
+
+
+    <table width="100px" height="100px"> 
+        <tr>
+      
+        <th>Name</th>
+        <th>IP</th>
+        <th>Port</th>
+        </tr>
+
+        @foreach (var Job in Model)
+        {
+            <tr>
+               
+                <td>@Job.clientName</td>
+                <td>@Job.port</td>
+                <td>@Job.ipAddress</td>
+               
+            </tr>
+        }
+    </table>
+</div>
+
+<script>
+    
+    var myVar;
+
+    $(document).ready(function () {
+        Geeks();
+    });
+
+    function search() {
+        $.ajax({
+            url: '/Clients/GetID/',
+            type: 'get',
+            contentType: 'application/json',
+            processData: false,
+            success: function (data, textStatus, jQxhr) {
+
+                $("#name").val(data.clientName);
+                $("#port").val(data.port);
+                $("#ip").val(data.ipAddress);
+
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    function Geeks() {
+        $('table tr:last')
+            .css("background-color", "yellow");
+
+        myVar = setTimeout(Geeks, 2000);
+    }
+</script>
